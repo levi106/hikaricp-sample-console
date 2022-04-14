@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: hikariapp
+  name: hikariapp
+  namespace: hikaricp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hikariapp
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: hikariapp
+    spec:
+      containers:
+      - image: ghcr.io/levi106/
+        name: hikariapp
+        env:
+        - name: APPLICATIONINSIGHTS_CONNECTION_STRING
+          valueFrom:
+            secretKeyRef:
+              name: ai
+              key: connectionstring
+        - name: SPRING_DATASOURCE_URL
+          valueFrom:
+            secretKeyRef:
+              name: db
+              key: connectionstring
+        - name: SPRING_DATASOURCE_MAXLIFETIME
+          value: 30000
+        - name: SPRING_DATASOURCE_CONNECTIONTESTQUERY
+          value: "SELECT 1"
+        - name: LOGGING_LEVEL_COM_ZAXXER_HIKARI_HIKARICONFIG
+          value: "DEBUG"
+        - name: LOGGING_LEVEL_COM_ZAXXER_HIKARI
+          value: "TRACE"
