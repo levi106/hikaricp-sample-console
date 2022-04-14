@@ -17,7 +17,7 @@ spec:
         app: hikariapp
     spec:
       containers:
-      - image: ghcr.io/levi106/
+      - image: ghcr.io/levi106/hikaricp-sample-console:main-ms
         name: hikariapp
         env:
         - name: APPLICATIONINSIGHTS_CONNECTION_STRING
@@ -31,7 +31,7 @@ spec:
               name: db
               key: connectionstring
         - name: SPRING_DATASOURCE_MAXLIFETIME
-          value: 30000
+          value: "30000"
         - name: SPRING_DATASOURCE_CONNECTIONTESTQUERY
           value: "SELECT 1"
         - name: LOGGING_LEVEL_COM_ZAXXER_HIKARI_HIKARICONFIG
