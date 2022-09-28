@@ -41,7 +41,7 @@ public class DataSourceConfig {
         config.setIdleTimeout(idleTimeout);
         config.setConnectionTimeout(connectionTimeout);
         config.setMaximumPoolSize(maxPoolSize);
-        config.setKeepaliveTime(keepaliveTime);
+        // config.setKeepaliveTime(keepaliveTime);
         if (connectionTestQuery.length() > 0) {
             config.setConnectionTestQuery(connectionTestQuery);
         }

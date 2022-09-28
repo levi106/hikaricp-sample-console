@@ -14,7 +14,8 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
-	implementation 'com.zaxxer:HikariCP:4.0.3'
+	implementation 'com.zaxxer:HikariCP:3.4.2'
+	implementation 'org.postgresql:postgresql:42.2.20'
 	runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'

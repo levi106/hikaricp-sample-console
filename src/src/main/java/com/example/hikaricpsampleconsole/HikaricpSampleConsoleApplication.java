@@ -36,11 +36,17 @@ public class HikaricpSampleConsoleApplication implements CommandLineRunner {
 
 	public static void main(String[] args) {
 		java.util.logging.Logger logger = java.util.logging.Logger.getLogger("com.microsoft.sqlserver.jdbc");
-		logger.setLevel(Level.FINE);
+		logger.setLevel(Level.FINER);
+		// java.util.logging.Logger logger2 = java.util.logging.Logger.getLogger("com.microsoft.sqlserver.jdbc.internals.DriverJDBCVersion");
+		// logger2.setLevel(Level.FINER);
+		java.util.logging.Logger pgLogger = java.util.logging.Logger.getLogger("org.postgresql");
+		pgLogger.setLevel(Level.FINEST);
 		final ConsoleHandler handler = new ConsoleHandler();
 		handler.setFormatter(new SimpleFormatter());
 		handler.setLevel(Level.ALL);
 		logger.addHandler(handler);
+		// logger2.addHandler(handler);
+		pgLogger.addHandler(handler);
 		SpringApplication.run(HikaricpSampleConsoleApplication.class, args);
 	}
 
@@ -53,6 +59,7 @@ public class HikaricpSampleConsoleApplication implements CommandLineRunner {
 				threadPool.submit(() -> {
 					try (final Connection conn = ds.getConnection();
 						final PreparedStatement statement = conn.prepareStatement("SELECT 1")) {
+						LOGGER.info("executeQuery");
 						statement.executeQuery();
 						conn.close();
 					} catch (SQLException e) {
